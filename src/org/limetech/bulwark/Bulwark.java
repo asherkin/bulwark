@@ -28,7 +28,7 @@ public class Bulwark {
 	}
 	
 	public static void main(String[] args) {
-		if (args.length < 1) {
+		if (args.length < 2) {
 			System.err.println("BSP Entity Encryption Tool (Bulwark) - Asher \"asherkin\" Baker");
 			System.err.println("Usage: java -jar Bulwark.jar <map.bsp> <key>");
 			System.err.println("Warning: This tool will modify the bsp file directly.");

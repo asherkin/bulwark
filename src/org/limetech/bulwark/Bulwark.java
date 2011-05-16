@@ -29,14 +29,19 @@ public class Bulwark {
 	
 	public static void main(String[] args) {
 		if (args.length < 1) {
-			System.out.println("BSP Entity Encryption Tool (Bulwark) - Asher \"asherkin\" Baker");
-			System.out.println("Usage: java -jar Bulwark.jar <map.bsp>");
-			System.out.println("Warning: This tool will modify the bsp file directly.");
-			System.exit(0);
+			System.err.println("BSP Entity Encryption Tool (Bulwark) - Asher \"asherkin\" Baker");
+			System.err.println("Usage: java -jar Bulwark.jar <map.bsp> <key>");
+			System.err.println("Warning: This tool will modify the bsp file directly.");
+			System.exit(1);
 		}
 		
 		String mapPath = args[0];
 		mapPath = mapPath.substring(0, mapPath.length() - 4);
+		
+		String iceKey = args[1];
+		if (iceKey.length() != 0) {
+			System.err.println("Key must be 8 characters in length.");
+		}
 		
 		RandomAccessFile bspFile = null;
 		
@@ -150,7 +155,7 @@ public class Bulwark {
 		}
 		
 		IceKey entityEncrypter = new IceKey(0);
-		entityEncrypter.set("A5fSXbf7".getBytes());
+		entityEncrypter.set(iceKey.getBytes());
 		
 		while (entities.length() % entityEncrypter.blockSize() != 0) {
 			entities = entities.concat("\0");
